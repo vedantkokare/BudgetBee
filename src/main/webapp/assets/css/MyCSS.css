@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+#successAlert{
+	position: absolute !important;
+	right: 5rem;
+	top: 30px;
+	font-weight: 600;
+}
+
+#errorAlert{
+	position: absolute !important;
+	right: 5rem;
+	top: 30px;
+	font-weight: 600;
+}
