@@ -14,7 +14,7 @@
 
 </head>
 
-<body class="bg-white">
+<body class="bg-white" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" >
 
 	<!-- Begin Wrapper -->
 	<div class="main-wrapper auth-bg">
@@ -32,10 +32,10 @@
 						</span>
 					</c:if>
 					<!-- Error Message -->
-					<c:if test="${not empty errorMsg}">
+					<c:if test="${not empty errorLogin}">
 						<span id="errorAlert"
 							class="mb-0 alert alert-danger p-2 rounded-1"> <i
-							class="fa fa-times-circle" aria-hidden="true"></i> ${errorMsg}
+							class="fa fa-times-circle" aria-hidden="true"></i> ${errorLogin}
 						</span>
 					</c:if>
 				</div>
@@ -147,6 +147,11 @@
 		if (success) success.style.display = "none";
 		if (error) error.style.display = "none";
 	}, 3000);
+	
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
 	</script>
 
 	<%@ include file="footerLinks.jsp"%>

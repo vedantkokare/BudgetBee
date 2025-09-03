@@ -23,7 +23,7 @@
 
 						<div class="d-flex align-items-center">
 
-							<span class="text-primary fs-3 fw-semibold"><i class="fa fa-user" aria-hidden="true"></i>
+							<span class="text-primary fw-semibold"><i class="fa fa-user" aria-hidden="true"></i>
 								Hello, ${loggedIn }
 							</span>
 

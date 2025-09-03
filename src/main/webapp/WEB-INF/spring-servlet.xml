@@ -30,6 +30,4 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
-	<mvc:resources mapping="/CSS/**" location="/CSS/" />
-	
 </beans>

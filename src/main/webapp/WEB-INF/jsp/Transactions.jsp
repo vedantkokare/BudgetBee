@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,27 +44,22 @@
 				</div>
 				<!-- End Page Header -->
 
-
-
-
 				<!-- Start Table Search -->
 				<div class="mb-3">
 					<div
 						class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-						<div class="d-flex align-items-center flex-wrap gap-2">
-							<div class="table-search d-flex align-items-center mb-0">
-								<div class="search-input">
-									<a href="javascript:void(0);" class="btn-searchset"><i
-										class="isax isax-search-normal fs-12"></i></a>
+						<form action="search">
+							<div class="d-flex align-items-center flex-wrap gap-2">
+								<div class="table-search d-flex align-items-center mb-0">
+									<div class="search-input">
+										<input type="text" class="form-control" name="search_By">
+										<a href="javascript:void(0);" class="btn-searchset"><i
+											class="isax isax-search-normal fs-12"></i></a>
+									</div>
 								</div>
+								<input type="submit" class="btn btn-primary" value="Search">
 							</div>
-							<a
-								class="btn btn-outline-white fw-normal d-inline-flex align-items-center"
-								href="javascript:void(0);" data-bs-toggle="offcanvas"
-								data-bs-target="#customcanvas"> <i
-								class="isax isax-filter me-1"></i>Filter
-							</a>
-						</div>
+						</form>
 						<div class="d-flex align-items-center flex-wrap gap-2">
 							<div class="dropdown">
 								<a href="javascript:void(0);"
@@ -81,24 +77,6 @@
 
 						</div>
 					</div>
-
-
-
-					<!-- Filter Info -->
-					<div class="align-items-center gap-2 flex-wrap filter-info mt-3">
-						<h6 class="fs-13 fw-semibold">Filters</h6>
-						<span class="tag bg-light border rounded-1 fs-12 text-dark badge"><span
-							class="num-count d-inline-flex align-items-center justify-content-center bg-success fs-10 me-1">1</span>Payment
-							Mode Selected<span class="ms-1 tag-close"><i
-								class="fa-solid fa-x fs-10"></i></span></span> <span
-							class="tag bg-light border rounded-1 fs-12 text-dark badge"><span
-							class="num-count d-inline-flex align-items-center justify-content-center bg-success fs-10 me-1">1</span>$10,000
-							- $25,500<span class="ms-1 tag-close"><i
-								class="fa-solid fa-x fs-10"></i></span></span> <a href="#"
-							class="link-danger fw-medium text-decoration-underline ms-md-1">Clear
-							All</a>
-					</div>
-					<!-- /Filter Info -->
 
 				</div>
 				<!-- End Table Search -->
@@ -118,44 +96,51 @@
 											<tr>
 												<th class="no-sort">ID</th>
 												<th>Date</th>
-												<th class="no-sort">Reference Number</th>
 												<th class="no-sort">Description</th>
+												<th class="no-sort">Credit/Debit</th>
 												<th class="no-sort">Amount</th>
 												<th>Payment Mode</th>
 												<th class="no-sort">Actions</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td><a href="javascript:void(0);"
-													data-bs-toggle="modal" data-bs-target="#details_income">INC00012</a></td>
-												<td>07 Aug 2024</td>
-												<td>REF12831</td>
-												<td>Server maintenance</td>
-												<td>
-													<p class="text-dark">$2,10,000</p>
-												</td>
-												<td>
-													<p class="text-dark">Cash</p>
-												</td>
-												<td class="action-item"><a href="javascript:void(0);"
-													data-bs-toggle="dropdown"> <i class="isax isax-more"></i>
-												</a>
-													<ul class="dropdown-menu">
-														<li><a href="javascript:void(0);"
-															class="dropdown-item d-flex align-items-center"
-															data-bs-toggle="modal" data-bs-target="#details_income"><i
-																class="isax isax-eye me-2"></i>View</a></li>
-														<li><a href="javascript:void(0);"
-															class="dropdown-item d-flex align-items-center"
-															data-bs-toggle="modal" data-bs-target="#edit_income"><i
-																class="isax isax-edit me-2"></i>Edit</a></li>
-														<li><a href="javascript:void(0);"
-															class="dropdown-item d-flex align-items-center"
-															data-bs-toggle="modal" data-bs-target="#delete_modal"><i
-																class="isax isax-trash me-2"></i>Delete</a></li>
-													</ul></td>
-											</tr>
+											<c:forEach var="exp" items="${list}">
+												<tr>
+													<td>${exp.id}</td>
+													<td>${exp.date}</td>
+													<td>${exp.description}</td>
+													<td>${exp.pay_type}</td>
+													<!-- Will show Credit or Debit -->
+													<td><span
+														class="<c:out value='${exp.pay_type == "Credit" ? "text-success" : "text-danger"}'/>">
+															${exp.amount} </span></td>
+													<td>${exp.pay_mode}</td>
+
+													<!-- Will show the respective amount -->
+
+													<td class="action-item d-flex align-items-center gap-2">
+														<a href="javascript:void(0);"
+														class="dropdown-item d-flex align-items-center border-0 "
+														data-bs-toggle="modal" data-bs-target="#details_income">
+															<button class="border-0 bg-transparent">
+																<i class="isax isax-eye me-2"></i>
+															</button>
+													</a> <a href="javascript:void(0);"
+														class="dropdown-item d-flex align-items-center border-0 "
+														data-bs-toggle="modal" data-bs-target="#edit_income">
+															<button class="border-0 bg-transparent">
+																<i class="isax isax-edit me-2"></i>
+															</button>
+													</a> <a href="javascript:void(0);"
+														class="dropdown-item d-flex align-items-center border-0 "
+														data-bs-toggle="modal" data-bs-target="#delete_modal">
+															<button class="border-0 bg-transparent">
+																<i class="isax isax-trash me-2"></i>
+															</button>
+													</a>
+													</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -170,7 +155,7 @@
 
 				<!-- Start Footer -->
 				<div
-					class="footer d-sm-flex align-items-center justify-content-between bg-white py-2 px-4 border-top">
+					class="footer d-flex align-self-end justify-content-between bg-white py-2 px-4 border-top">
 					<p class="text-dark mb-0">
 						&copy; 2025 <a href="javascript:void(0);" class="link-primary">Vedant.</a>,
 						All Rights Reserved
@@ -184,103 +169,6 @@
 			<!-- ========================
 			End Page Content
 		========================= -->
-
-			<!-- Start Filter -->
-			<div class="offcanvas offcanvas-offset offcanvas-end" tabindex="-1"
-				id="customcanvas">
-				<div class="offcanvas-header d-block pb-0">
-					<div
-						class="border-bottom d-flex align-items-center justify-content-between pb-3">
-						<h6 class="offcanvas-title">Filter</h6>
-						<button type="button"
-							class="btn-close btn-close-modal custom-btn-close"
-							data-bs-dismiss="offcanvas" aria-label="Close">
-							<i class="fa-solid fa-x"></i>
-						</button>
-					</div>
-				</div>
-				<div class="offcanvas-body pt-3">
-					<form action="filter">
-						<div class="mb-3">
-							<label class="form-label">Amount</label>
-							<div class="dropdown">
-								<a href="javascript:void(0);"
-									class="dropdown-toggle btn btn-lg bg-light  d-flex align-items-center justify-content-start fs-13 fw-normal border"
-									data-bs-toggle="dropdown" data-bs-auto-close="outside"
-									aria-expanded="true"> Select </a>
-								<div class="dropdown-menu shadow-lg w-100 dropdown-info">
-									<div class="filter-range">
-										<input type="text" id="range_03">
-										<p>
-											Range : <span class="text-gray-9">Range : $200 - $5695</span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="mb-3">
-							<label class="form-label">Payment Mode</label>
-							<div class="dropdown">
-								<a href="javascript:void(0);"
-									class="dropdown-toggle btn btn-lg bg-light  d-flex align-items-center justify-content-start fs-13 fw-normal border"
-									data-bs-toggle="dropdown" data-bs-auto-close="outside"
-									aria-expanded="true"> Select </a>
-								<div class="dropdown-menu shadow-lg w-100 dropdown-info">
-									<ul class="mb-3">
-										<li><label
-											class="dropdown-item px-2 d-flex align-items-center text-dark">
-												<input class="form-check-input m-0 me-2" type="checkbox"
-												checked> Cash
-										</label></li>
-										<li><label
-											class="dropdown-item px-2 d-flex align-items-center text-dark">
-												<input class="form-check-input m-0 me-2" type="checkbox">
-												Cheque
-										</label></li>
-										<li><label
-											class="dropdown-item px-2 d-flex align-items-center text-dark">
-												<input class="form-check-input m-0 me-2" type="checkbox">
-												PhonePay
-										</label></li>
-										<li><label
-											class="dropdown-item px-2 d-flex align-items-center text-dark">
-												<input class="form-check-input m-0 me-2" type="checkbox">
-												GPay
-										</label></li>
-										<li><label
-											class="dropdown-item px-2 d-flex align-items-center text-dark">
-												<input class="form-check-input m-0 me-2" type="checkbox">
-												Other
-										</label></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="mb-3">
-							<label id="dateRangePicker" class="form-label">Date Range</label>
-							<div class="input-group position-relative">
-								<input type="text"
-									class="form-control date-range bookingrange rounded-end">
-								<span class="input-icon-addon fs-16 text-gray-9"> <i
-									class="isax isax-calendar-2"></i>
-								</span>
-							</div>
-						</div>
-						<div class="offcanvas-footer">
-							<div class="row g-2">
-								<div class="col-6">
-									<a href="#" class="btn btn-outline-white w-100">Reset</a>
-								</div>
-								<div class="col-6">
-									<button data-bs-dismiss="offcanvas"
-										class="btn btn-primary w-100" id="filter-submit">Submit</button>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-			<!-- End Filter -->
 
 			<!-- Start Add Modal  -->
 			<div id="add-income" class="modal fade">
@@ -309,6 +197,7 @@
 												<option value="Health">Health & Fitness</option>
 												<option value="Travel">Travel</option>
 												<option value="Gift">Gift & Donation</option>
+												<option value="Farming">Farming</option>
 												<option value="Other">Other</option>
 											</select>
 
@@ -336,7 +225,7 @@
 										<div class="mb-3">
 											<label class="form-label">Payment Mode <span
 												class="text-danger">*</span></label> <select
-												class="select form-control" name="pay-mode">
+												class="select form-control" name="pay_mode">
 												<option>Select</option>
 												<option>Cash</option>
 												<option>Cheque</option>
@@ -352,12 +241,12 @@
 											<label class="form-label d-block">Payment Type <span
 												class="text-danger">*</span></label>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio" name="pay-type"
+												<input class="form-check-input" type="radio" name="pay_type"
 													id="Credited" value="Credited"> <label
 													class="form-check-label">Credited</label>
 											</div>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio" name="pay-type"
+												<input class="form-check-input" type="radio" name="pay_type"
 													id="Debited" value="Debited"> <label
 													class="form-check-label">Debited</label>
 											</div>
@@ -366,7 +255,7 @@
 									<div class="col-md-12">
 										<div>
 											<label class="form-label">Description</label>
-											<textarea class="form-control"></textarea>
+											<textarea class="form-control" name="description"></textarea>
 										</div>
 									</div>
 								</div>
@@ -417,6 +306,7 @@
 												<option value="Health">Health & Fitness</option>
 												<option value="Travel">Travel</option>
 												<option value="Gift">Gift & Donation</option>
+												<option value="Farming">Farming</option>
 												<option value="Other">Other</option>
 											</select>
 
@@ -443,7 +333,7 @@
 										<div class="mb-3">
 											<label class="form-label">Payment Mode <span
 												class="text-danger">*</span></label> <select
-												class="select form-control" name="pay-mode">
+												class="select form-control" name="pay_mode">
 												<option>Select</option>
 												<option>Cash</option>
 												<option>Cheque</option>
@@ -459,12 +349,12 @@
 											<label class="form-label d-block">Payment Type <span
 												class="text-danger">*</span></label>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio" name="pay-type"
+												<input class="form-check-input" type="radio" name="pay_type"
 													id="Credited" value="Credited"> <label
 													class="form-check-label">Credited</label>
 											</div>
 											<div class="form-check form-check-inline">
-												<input class="form-check-input" type="radio" name="pay-type"
+												<input class="form-check-input" type="radio" name="pay_type"
 													id="Debited" value="Debited"> <label
 													class="form-check-label">Debited</label>
 											</div>

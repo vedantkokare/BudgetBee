@@ -14,7 +14,7 @@
 
 </head>
 
-<body class="bg-white">
+<body class="bg-white" onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="" >
 
 	<!-- Begin Wrapper -->
 	<div class="main-wrapper auth-bg">
@@ -172,6 +172,11 @@
 		if (success) success.style.display = "none";
 		if (error) error.style.display = "none";
 	}, 3000);
+	
+    window.history.forward();
+    function noBack() {
+        window.history.forward();
+    }
 	</script>
 	
 <%@ include file="footerLinks.jsp"%>
