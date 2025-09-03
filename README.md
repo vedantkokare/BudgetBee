@@ -69,13 +69,6 @@ BudgetBee/
 
 ---
 
-## 📸 Screenshots
-
-DashBoard
-
-
----
-
 ## 🎯 Use Cases
 
 * **Students** – Manage daily pocket money.
