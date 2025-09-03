@@ -1,9 +1,3 @@
-Perfect 👍 a **well-structured, SEO-optimized README.md** will make your **BudgetBee** repo stand out on GitHub and also improve search rankings.
-
-Here’s a professional README template for you 👇
-
----
-
 # 🐝 BudgetBee – Smart Expense Tracker
 
 **BudgetBee** is a lightweight and user-friendly **expense tracker** built with **Java Spring Boot, JSP, and MySQL**. It helps individuals and small businesses manage their **income, expenses, and budgets** efficiently with a clean and responsive dashboard.
