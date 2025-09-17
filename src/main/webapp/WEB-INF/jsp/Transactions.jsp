@@ -96,7 +96,7 @@
 											<tr>
 												<th class="no-sort">ID</th>
 												<th>Date</th>
-												<th class="no-sort">Description</th>
+												<th class="no-sort">Category</th>
 												<th class="no-sort">Credit/Debit</th>
 												<th class="no-sort">Amount</th>
 												<th>Payment Mode</th>
@@ -108,7 +108,7 @@
 												<tr>
 													<td>${exp.id}</td>
 													<td>${exp.date}</td>
-													<td>${exp.description}</td>
+													<td>${exp.category}</td>
 													<td>${exp.pay_type}</td>
 													<!-- Will show Credit or Debit -->
 													<td><span
@@ -132,8 +132,9 @@
 																<i class="isax isax-edit me-2"></i>
 															</button>
 													</a> <a href="javascript:void(0);"
-														class="dropdown-item d-flex align-items-center border-0 "
-														data-bs-toggle="modal" data-bs-target="#delete_modal">
+														class="dropdown-item d-flex align-items-center border-0 deleteBtn"
+														data-id="${exp.id}" data-bs-toggle="modal"
+														data-bs-target="#delete_modal">
 															<button class="border-0 bg-transparent">
 																<i class="isax isax-trash me-2"></i>
 															</button>
@@ -448,15 +449,34 @@
 							<p class="mb-3">Are you sure, you want to delete expense?</p>
 							<div class="d-flex justify-content-center">
 								<a href="javascript:void(0);" class="btn btn-outline-white me-3"
-									data-bs-dismiss="modal">Cancel</a> <a href="incomes.html"
-									class="btn btn-primary">Yes, Delete</a>
+									data-bs-dismiss="modal">Cancel</a> <a href="dashboard-page" id="confirmDelete"
+							class="btn btn-primary">Yes, Delete</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- End Delete Modal  -->
-
 		</div>
-		<!-- End Wrapper -->
-		<%@ include file="footerLinks.jsp"%>
+	</div>
+	<!-- End Wrapper -->
+	
+	<script>
+    let deleteId = null;
+
+    // When delete icon is clicked
+    document.querySelectorAll('.deleteBtn').forEach(btn => {
+        btn.addEventListener('click', function () {
+            deleteId = this.getAttribute('data-id');
+        });
+    });
+
+    // When "Yes, Delete" is clicked
+    document.getElementById('confirmDelete').addEventListener('click', function () {
+        if (deleteId) {
+            // Redirect to controller delete mapping
+            window.location.href = "deleteExpense?id=" + deleteId;
+        }
+    });
+	</script>
+	<%@ include file="footerLinks.jsp"%>

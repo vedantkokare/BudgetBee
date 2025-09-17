@@ -41,14 +41,17 @@ public class HomeController {
 		List<Expense_Entities> list = es.getAll(username);
 		m.addAttribute("list", list);
 		
+		m.addAttribute("loggedIn", username);
+		
 		int totalCredit = es.totalCredit(username);
 		m.addAttribute("totalCredit", totalCredit);
 		
-		m.addAttribute("loggedIn", username);
-		
 		int totalDebit = es.totalDebit(username);
-
 	    m.addAttribute("totalDebit", totalDebit);
+	    
+		int getTotalAmount = es.getTotalAmount(username);
+		m.addAttribute("getTotalAmount", getTotalAmount);
+		
 		return "dashboard";
 
 	}

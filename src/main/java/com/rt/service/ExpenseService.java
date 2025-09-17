@@ -17,6 +17,14 @@ public class ExpenseService {
 	    public void add(Expense_Entities e, String username) {
 	        ed.add(e, username);
 	    }
+	    
+	    public void updateExpense(Expense_Entities e) {
+			ed.update(e);		
+		}
+	    
+	    public void deleteExpense(int id) {
+	        ed.deleteById(id);
+	    }
 
 		public List<Expense_Entities> getAll(String username) {
 			
@@ -34,6 +42,19 @@ public class ExpenseService {
 		public int totalCredit(String username) {
 			// TODO Auto-generated method stub
 			return ed.totalCredit(username);
+		}
+		
+		public int getTotalAmount(String username) {
+			
+		    return totalCredit(username) - totalDebit(username);
+		        
+		 }
+
+		public Expense_Entities getById(int id) {
+			
+			Expense_Entities ee = ed.getById(id);
+			return ee;
+			
 		}
 	
 }

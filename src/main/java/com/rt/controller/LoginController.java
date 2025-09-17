@@ -55,6 +55,8 @@ public class LoginController {
 			int totalCredit = es.totalCredit(username);
 			m.addAttribute("totalCredit", totalCredit);
 			
+			int getTotalAmount = es.getTotalAmount(username);
+			m.addAttribute("getTotalAmount", getTotalAmount);
 //			Get All Data
 			List<Expense_Entities> list = es.getAll(username);
 			m.addAttribute("list", list);
