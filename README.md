@@ -38,37 +38,6 @@ BudgetBee/
 
 ---
 
-## ⚡ Installation & Setup
-
-1. **Clone the Repository**
-
-   ```bash
-   git clone https://github.com/vedantkokare/BudgetBee.git
-   cd BudgetBee
-   ```
-
-2. **Configure Database**
-
-   * Create a MySQL database named `budgetbee`.
-   * Update `application.properties` with your MySQL username & password:
-
-     ```properties
-     spring.datasource.url=jdbc:mysql://localhost:3306/budgetbee
-     spring.datasource.username=your-username
-     spring.datasource.password=your-password
-     ```
-
-3. **Run the Application**
-
-   ```bash
-   mvn spring-boot:run
-   ```
-
-4. **Access the App**
-   Open [http://localhost:8080](http://localhost:8080) in your browser.
-
----
-
 ## 🎯 Use Cases
 
 * **Students** – Manage daily pocket money.
