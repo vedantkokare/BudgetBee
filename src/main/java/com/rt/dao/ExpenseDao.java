@@ -23,7 +23,7 @@ public class ExpenseDao {
     public void add(Expense_Entities e, String username) {
     	Object args[]= {e.getCategory(), e.getDate(),e.getCredit_amount(), e.getDebit_amount(), e.getPay_mode(), e.getPay_type(), e.getDescription(),username};
         String query = "insert into expensetbl(category, date, credit_amount, debit_amount, pay_mode, pay_type, description, usermail) values(?, ?, ?, ?, ?, ?, ?, ?)";
-        int rs = jdbc.update(query,args);
+        jdbc.update(query,args);
     }
     
     public void update(Expense_Entities e) {
