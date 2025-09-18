@@ -206,20 +206,30 @@
 
 													<td class="action-item d-flex align-items-center gap-2">
 														<a href="javascript:void(0);"
-														class="dropdown-item d-flex align-items-center border-0 "
+														class="dropdown-item d-flex align-items-center border-0 editBtn"
+														data-id="${exp.id}" data-category="${exp.category}"
+														data-date="${exp.date}" data-amount="${exp.amount}"
+														data-pay_mode="${exp.pay_mode}"
+														data-pay_type="${exp.pay_type}"
+														data-description="${exp.description}"
 														data-bs-toggle="modal" data-bs-target="#details_income">
 															<button class="border-0 bg-transparent">
 																<i class="isax isax-eye me-2"></i>
 															</button>
-													</a> <a href="javascript:void(0);"
-														class="dropdown-item d-flex align-items-center border-0 "
-														data-bs-toggle="modal" data-bs-target="#edit_income">
-															<button class="border-0 bg-transparent">
-																<i class="isax isax-edit me-2">
-																</i>
-															</button>
 													</a>
 													 <a href="javascript:void(0);"
+														class="dropdown-item d-flex align-items-center border-0 editBtn"
+														data-id="${exp.id}" data-category="${exp.category}"
+														data-date="${exp.date}" data-amount="${exp.amount}"
+														data-pay_mode="${exp.pay_mode}"
+														data-pay_type="${exp.pay_type}"
+														data-description="${exp.description}"
+														data-bs-toggle="modal" data-bs-target="#edit_income">
+															<button class="border-0 bg-transparent">
+																<i class="isax isax-edit me-2"></i>
+															</button>
+													</a> 
+													<a href="javascript:void(0);"
 														class="dropdown-item d-flex align-items-center border-0 deleteBtn"
 														data-id="${exp.id}" data-bs-toggle="modal"
 														data-bs-target="#delete_modal">
@@ -385,13 +395,13 @@
 							<div class="col-md-12">
 								<div class="mb-3">
 									<label class="form-label">Id <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" name="id" value="${id }">
+									<input type="text" class="form-control" name="id">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="mb-3">
 									<label class="form-label">Category</label> <select
-										name="category" id="category" class="form-control" value="${category }">
+										name="category" id="category" class="form-control">
 										<option value="Select Category">Select Category</option>
 										<option value="Food">Food & Drink</option>
 										<option value="Housing">Housing</option>
@@ -411,22 +421,22 @@
 										class="text-danger">*</span></label>
 									<div class="input-group position-relative mb-3">
 										<input type="date" class="form-control rounded-end"
-											placeholder="dd/mm/yyyy" name="date" ${date }>
+											placeholder="dd/mm/yyyy" name="date">
 									</div>
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="mb-3">
 									<label class="form-label">Amount <span
-										class="text-danger">*</span></label>
-										<input type="text" class="form-control" name="amount" ${amount }>
+										class="text-danger">*</span></label> <input type="text"
+										class="form-control" name="amount">
 								</div>
 							</div>
 							<div class="col-md-12">
 								<div class="mb-3">
 									<label class="form-label">Payment Mode <span
 										class="text-danger">*</span></label> <select
-										class="select form-control" name="pay_mode" ${pay_mode }>
+										class="select form-control" name="pay_mode">
 										<option>Select</option>
 										<option>Cash</option>
 										<option>Cheque</option>
@@ -443,12 +453,12 @@
 										class="text-danger">*</span></label>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="radio" name="pay_type"
-											id="Credited" value="Credited"> <label
+											id="Credit" value="Credit"> <label
 											class="form-check-label">Credited</label>
 									</div>
 									<div class="form-check form-check-inline">
 										<input class="form-check-input" type="radio" name="pay_type"
-											id="Debited" value="Debited"> <label
+											id="Debit" value="Debit"> <label
 											class="form-check-label">Debited</label>
 									</div>
 								</div>
@@ -491,35 +501,35 @@
 							<div class="col-md-6">
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">ID</p>
-									<p>INC00025</p>
+									<p>${exp.id}</p>
 								</div>
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Amount</p>
-									<p>$10,000</p>
+									<p>${exp.amount }</p>
 								</div>
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Payment Mode</p>
-									<p>Cash</p>
+									<p>${exp.pay_mode }</p>
 								</div>
 							</div>
 
 							<div class="col-md-6">
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Category</p>
-									<p>Food</p>
+									<p>${exp.category }</p>
 								</div>
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Date</p>
-									<p>22 Feb 2025</p>
+									<p>${exp.date }</p>
 								</div>
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Payment Type</p>
-									<p>Credited</p>
+									<p>${exp.pay_type }</p>
 								</div>
 							</div>
 							<div>
 								<p class="fw-semibold text-dark mb-0">Description</p>
-								<p>Payment for raw materials</p>
+								<p>${exp.description }</p>
 							</div>
 						</div>
 					</div>
@@ -553,35 +563,36 @@
 	<!-- End Wrapper -->
 
 	<script>
-document.querySelectorAll('.editBtn').forEach(btn => {
-    btn.addEventListener('click', function () {
-        // Get data from row
-        const id = this.getAttribute('data-id');
-        const category = this.getAttribute('data-category');
-        const date = this.getAttribute('data-date');
-        const amount = this.getAttribute('data-amount');
-        const payMode = this.getAttribute('data-pay_mode');
-        const payType = this.getAttribute('data-pay_type');
-        const description = this.getAttribute('data-description');
+	document.querySelectorAll('.editBtn').forEach(btn => {
+	    btn.addEventListener('click', function () {
+	        // Get data from button attributes
+	        const id = this.getAttribute('data-id');
+	        const category = this.getAttribute('data-category');
+	        const date = this.getAttribute('data-date');
+	        const amount = this.getAttribute('data-amount');
+	        const payMode = this.getAttribute('data-pay_mode');
+	        const payType = this.getAttribute('data-pay_type');
+	        const description = this.getAttribute('data-description');
 
-        // Set values inside modal inputs
-        document.querySelector('#edit_income input[name="id"]').value = id;
-        document.querySelector('#edit_income select[name="category"]').value = category;
-        document.querySelector('#edit_income input[name="date"]').value = date;
-        document.querySelector('#edit_income input[name="amount"]').value = amount;
-        document.querySelector('#edit_income select[name="pay_mode"]').value = payMode;
+	        // Fill modal fields
+	        document.querySelector('#edit_income input[name="id"]').value = id;
+	        document.querySelector('#edit_income select[name="category"]').value = category;
+	        document.querySelector('#edit_income input[name="date"]').value = date;
+	        document.querySelector('#edit_income input[name="amount"]').value = amount;
+	        document.querySelector('#edit_income select[name="pay_mode"]').value = payMode;
 
-        // Radio buttons for pay_type
-        if (payType === "Credit" || payType === "Credited") {
-            document.querySelector('#edit_income input[value="Credited"]').checked = true;
-        } else if (payType === "Debit" || payType === "Debited") {
-            document.querySelector('#edit_income input[value="Debited"]').checked = true;
-        }
+	        // Radio buttons
+	        if (payType.toLowerCase() === "credit" || payType.toLowerCase() === "credit") {
+	            document.querySelector('#edit_income input[value="Credit"]').checked = true;
+	        } else if (payType.toLowerCase() === "debit" || payType.toLowerCase() === "debit") {
+	            document.querySelector('#edit_income input[value="Debit"]').checked = true;
+	        }
 
-        // Description
-        document.querySelector('#edit_income textarea[name="description"]').value = description;
-    });
-});
+	        // Textarea
+	        document.querySelector('#edit_income textarea[name="description"]').value = description;
+	    });
+	});
+
 </script>
 
 
