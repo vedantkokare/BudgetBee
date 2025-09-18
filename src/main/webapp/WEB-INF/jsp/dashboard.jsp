@@ -206,7 +206,7 @@
 
 													<td class="action-item d-flex align-items-center gap-2">
 														<a href="javascript:void(0);"
-														class="dropdown-item d-flex align-items-center border-0 editBtn"
+														class="dropdown-item d-flex align-items-center border-0 viewBtn"
 														data-id="${exp.id}" data-category="${exp.category}"
 														data-date="${exp.date}" data-amount="${exp.amount}"
 														data-pay_mode="${exp.pay_mode}"
@@ -501,35 +501,35 @@
 							<div class="col-md-6">
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">ID</p>
-									<p>${exp.id}</p>
+									<p id="viewId">${exp.id}</p>
 								</div>
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Amount</p>
-									<p>${exp.amount }</p>
+									<p id="viewAmount">${exp.amount }</p>
 								</div>
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Payment Mode</p>
-									<p>${exp.pay_mode }</p>
+									<p id="viewPayMode">${exp.pay_mode }</p>
 								</div>
 							</div>
 
 							<div class="col-md-6">
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Category</p>
-									<p>${exp.category }</p>
+									<p id="viewCategory">${exp.category }</p>
 								</div>
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Date</p>
-									<p>${exp.date }</p>
+									<p id="viewDate">${exp.date }</p>
 								</div>
 								<div class="mb-3">
 									<p class="fw-semibold text-dark mb-0">Payment Type</p>
-									<p>${exp.pay_type }</p>
+									<p id="viewPayType">${exp.pay_type }</p>
 								</div>
 							</div>
 							<div>
 								<p class="fw-semibold text-dark mb-0">Description</p>
-								<p>${exp.description }</p>
+								<p id="viewDescription">${exp.description }</p>
 							</div>
 						</div>
 					</div>
@@ -590,6 +590,38 @@
 
 	        // Textarea
 	        document.querySelector('#edit_income textarea[name="description"]').value = description;
+	    });
+	});
+
+</script>
+	<script>
+	document.querySelectorAll('.viewBtn').forEach(btn => {
+	    btn.addEventListener('click', function () {
+	        // Get data from button attributes
+	        const id = this.getAttribute('data-id');
+	        const category = this.getAttribute('data-category');
+	        const date = this.getAttribute('data-date');
+	        const amount = this.getAttribute('data-amount');
+	        const payMode = this.getAttribute('data-pay_mode');
+	        const payType = this.getAttribute('data-pay_type');
+	        const description = this.getAttribute('data-description');
+
+	        // Fill modal fields
+	        document.querySelector('#details_income #viewId').innerHTMl = id;
+	        document.querySelector('#details_income #viewCategory').innerHTMl = category;
+	        document.querySelector('#details_income #viewDate').innerHTMl = date;
+	        document.querySelector('#details_income #viewAmount').innerHTMl = amount;
+	        document.querySelector('#details_income #viewPayMode').innerHTMl = payMode;
+
+	        // Radio buttons
+	        if (payType.toLowerCase() === "credit" || payType.toLowerCase() === "credit") {
+	            document.querySelector('#details_income #viewPayType').innerHTMl = "Credit";
+	        } else if (payType.toLowerCase() === "debit" || payType.toLowerCase() === "debit") {
+	            document.querySelector('#details_income #viewPayType').innerHTMl = "Debit";
+	        }
+
+	        // Textarea
+	        document.querySelector('#details_income #viewDescription').innerHTMl = description;
 	    });
 	});
 
