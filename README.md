@@ -29,6 +29,7 @@ Database: MySQL
 Version Control: Git & GitHub
 
 📂 Project Structure
+
 BudgetBee/
 │-- src/main/java/com/rt/          # Java source files (controllers, services, entities)
 │-- src/main/webapp/WEB-INF/       # JSP pages (views)
@@ -43,8 +44,9 @@ Tomcat: 7
 
 Database: MySQL
 
-⚡ How to Get & Run the Project
-1. Clone the Repository
+How to Get & Run the Project
+1. Clone the Repository :
+
 git clone https://github.com/vedantkokare/BudgetBee.git
 
 2. Import into IDE
@@ -67,7 +69,9 @@ Make sure you have created the database budget-bee in MySQL:
 CREATE DATABASE `budget-bee`;
 
 🗄 Database Tables
+
 Table: expensetbl
+
 CREATE TABLE expensetbl (
     id INT AUTO_INCREMENT PRIMARY KEY,
     category VARCHAR(60),
@@ -81,6 +85,7 @@ CREATE TABLE expensetbl (
 );
 
 Table: logintbl
+
 CREATE TABLE logintbl (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(45),
