@@ -66,6 +66,29 @@ Make sure you have created the database budget-bee in MySQL:
 
 CREATE DATABASE `budget-bee`;
 
+🗄 Database Tables
+Table: expensetbl
+CREATE TABLE expensetbl (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(60),
+    date VARCHAR(45),
+    credit_amount INT,
+    debit_amount INT,
+    pay_mode VARCHAR(45),
+    pay_type VARCHAR(45),
+    description VARCHAR(150),
+    usermail VARCHAR(45)
+);
+
+Table: logintbl
+CREATE TABLE logintbl (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(45),
+    email VARCHAR(45),
+    pwd VARCHAR(45),
+    confirm_pwd VARCHAR(45)
+);
+
 4. Build the Project
 mvn clean install
 
